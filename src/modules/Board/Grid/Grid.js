@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import React, { useRef } from 'react'
 
 import { css } from '@emotion/core'
 
@@ -6,17 +6,13 @@ import Blocks from './Blocks'
 import CustomDragLayer from './CustomDragLayer'
 
 import useDropForGrid from './hooks/useDropForGrid'
+import useResizeObserver from './hooks/useResizeObserver'
 
 function Grid({ gridShape, items, setItems, connections, setConnections }) {
   const { ref } = useDropForGrid(gridShape, items, setItems)
 
-  const [gridDimensions, setGridDimensions] = useState({})
-  const measuredRef = useCallback((node) => {
-    if (node !== null) {
-      const { width, height } = node.getBoundingClientRect()
-      setGridDimensions({ width, height })
-    }
-  }, [])
+  const measuredRef = useRef()
+  const gridDimensions = useResizeObserver(measuredRef)
 
   const { x, y } = gridShape
 
