@@ -18,6 +18,7 @@ export default function Shadows({ items }) {
               grid-row-end: ${y + height};
               grid-template-columns: repeat(${width}, ${100 / width}%);
               grid-template-rows: repeat(${height}, ${100 / height}%);
+              z-index: -2;
             `}
           />
         ) : null,
