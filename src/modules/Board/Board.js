@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
+import { css } from '@emotion/core'
+
 import uuid from 'uuid'
 
 import { ITEM, BOX } from '../../constants'
 
 import Grid from './Grid/Grid'
+import SidePanel from './SidePanel/SidePanel'
 
 function Board({ xBoardSize, yBoardSize }) {
   const [items, setItems] = useState([
@@ -60,16 +63,25 @@ function Board({ xBoardSize, yBoardSize }) {
   const [connections, setConnections] = useState([])
 
   return (
-    <Grid
-      setItems={setItems}
-      items={items}
-      connections={connections}
-      setConnections={setConnections}
-      gridShape={{
-        x: xBoardSize,
-        y: yBoardSize,
-      }}
-    ></Grid>
+    <div
+      css={css`
+        display: flex;
+        flex-direction: row;
+        height: 100%;
+      `}
+    >
+      <SidePanel />
+      <Grid
+        setItems={setItems}
+        items={items}
+        connections={connections}
+        setConnections={setConnections}
+        gridShape={{
+          x: xBoardSize,
+          y: yBoardSize,
+        }}
+      />
+    </div>
   )
 }
 
