@@ -1,7 +1,6 @@
 import { linkVertical, linkHorizontal } from 'd3-shape'
 
 export function computeConnectionLines(connections, items, gridDimensions, gridShape) {
-  console.log(items[0])
   const gridStepX = gridDimensions.width / gridShape.x
   const gridStepY = gridDimensions.height / gridShape.y
   return connections.map((connection) => {

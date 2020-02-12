@@ -5,7 +5,6 @@ import { computeConnectionLines } from './utils'
 
 export default function Connections({ gridDimensions, gridShape, connections, items }) {
   const { width, height } = gridDimensions
-  console.log(width, height)
   const linesCoordinates = computeConnectionLines(connections, items, gridDimensions, gridShape)
   if (gridDimensions.width && gridDimensions.height) {
     return (
