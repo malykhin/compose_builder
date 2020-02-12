@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "jsx": "react",
+    "baseUrl": "./",
+    "paths": {
+      "queries/*": ["./src/queries/*"],
+      "mutations/*": ["./src/mutations/*"],
+      "subscriptions/*": ["./src/subscriptions/*"],
+      "components/*": ["./src/components/*"],
+      "constants/*": ["./src/constants/*"]
+    }
+  },
+  "exclude": ["node_modules"]
+}
