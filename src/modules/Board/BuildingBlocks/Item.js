@@ -33,21 +33,23 @@ function Item({ x, y, width, height, id, connections, setConnections }) {
         }
       `}
     >
-      <div
-        ref={connectorRef}
-        css={css`
-          border: 1px solid #777;
-          border-radius: 50%;
-          height: 10px;
-          width: 10px;
-          align-self: flex-end;
-          box-sizing: border-box;
-          z-index: 6;
-          &:hover {
-            background-color: #999;
-          }
-        `}
-      />
+      {id && (
+        <div
+          ref={connectorRef}
+          css={css`
+            border: 1px solid #777;
+            border-radius: 50%;
+            height: 10px;
+            width: 10px;
+            align-self: flex-end;
+            box-sizing: border-box;
+            z-index: 6;
+            &:hover {
+              background-color: #999;
+            }
+          `}
+        />
+      )}
     </div>
   )
 }

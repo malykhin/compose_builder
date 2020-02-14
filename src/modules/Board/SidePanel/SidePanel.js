@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import { css } from '@emotion/core'
 import { Transition } from 'react-transition-group'
 
+import Item from '../BuildingBlocks/Item'
+import Box from '../BuildingBlocks/Box'
+
 const toggleButtonSize = 36
 const panelTransitionStyles = {
   entering: 0,
@@ -28,12 +31,11 @@ export default function SidePanel() {
               margin-left: ${panelTransitionStyles[state]};
               border-right: 1px solid #eee;
               display: flex;
-              flex-direction: row;
-              justify-content: space-between;
+              flex-direction: column;
+              justify-content: flex-start;
               margin-right: 12px;
             `}
           >
-            Panel
             <button
               onClick={toggleDisplay}
               css={css`
@@ -45,6 +47,7 @@ export default function SidePanel() {
                 outline: none;
                 margin-right: 4px;
                 font-size: 20px;
+                align-self: flex-end;
                 &:hover {
                   background-color: #ccc;
                 }
@@ -52,6 +55,20 @@ export default function SidePanel() {
             >
               {isDisplay ? <>&larr;</> : <>&rarr;</>}
             </button>
+            <div
+              css={css`
+                margin-top: 16px;
+                width: 100%;
+                height: 100%;
+                display: grid;
+                grid-template-columns: 8px auto 8px;
+                grid-template-rows: repeat(4, 15%);
+                grid-row-gap: 16px;
+              `}
+            >
+              <Item x={2} y={1} height={1} width={1} />
+              <Box x={2} y={2} height={2} width={1} />
+            </div>
           </div>
         )}
       </Transition>

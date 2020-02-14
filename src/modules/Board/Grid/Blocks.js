@@ -1,7 +1,7 @@
 import React from 'react'
 
-import Item from './Item'
-import Box from './Box'
+import Item from '../BuildingBlocks/Item'
+import Box from '../BuildingBlocks/Box'
 
 import { ITEM, BOX } from '../../../constants'
 

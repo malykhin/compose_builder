@@ -1,4 +1,5 @@
 import _ from 'lodash'
+import uuid from 'uuid'
 
 import { MIN_BOX_HEIGHT, MIN_BOX_WIDTH, ITEM, BOX, BOX_RESIZE, CONNECTOR } from '../../../../constants'
 
@@ -36,6 +37,33 @@ export function getGridStep(dropTargetDimensions, gridShape) {
 export function mutateItemForDrag(items, index, dropCoordinates, gridStep, gridShape) {
   _.set(items, `${index}.x`, convertToPosition(dropCoordinates.x, gridStep.x, gridShape.x))
   _.set(items, `${index}.y`, convertToPosition(dropCoordinates.y, gridStep.y, gridShape.y))
+}
+
+function itemFactory(x, y, item) {
+  const defaultItem = {
+    x,
+    y,
+    type: item.type,
+    width: 1,
+    id: uuid(),
+  }
+  const itemMap = {
+    [ITEM]: {
+      ...defaultItem,
+      height: 1,
+    },
+    [BOX]: {
+      ...defaultItem,
+      height: 2,
+    },
+  }
+  return itemMap[item.type]
+}
+
+export function appendItem(items, item, dropCoordinates, gridStep, gridShape) {
+  const x = convertToPosition(dropCoordinates.x, gridStep.x, gridShape.x)
+  const y = convertToPosition(dropCoordinates.y, gridStep.y, gridShape.y)
+  items.push(itemFactory(x, y, item))
 }
 
 export function mutateItemForResize(items, index, dropCoordinates, gridStep, gridShape) {

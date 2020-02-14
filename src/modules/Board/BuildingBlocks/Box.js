@@ -54,7 +54,7 @@ function Box({ x, y, width, height, id }) {
       >
         Mark
       </div>
-      <ResizeMark resizeRef={resizeRef} isDragging={isResizeDragging} rowStart={height} columnStart={width} />
+      {id && <ResizeMark resizeRef={resizeRef} isDragging={isResizeDragging} rowStart={height} columnStart={width} />}
     </div>
   )
 }

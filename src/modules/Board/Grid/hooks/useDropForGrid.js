@@ -3,7 +3,14 @@ import { useDrop } from 'react-dnd'
 import _ from 'lodash'
 
 import { ITEM, BOX, BOX_RESIZE, CONNECTOR } from '../../../../constants'
-import { getDropRectangle, prepareParamsForDrop, mutateItemForDrag, mutateItemForResize, canDropMap } from './utils'
+import {
+  getDropRectangle,
+  prepareParamsForDrop,
+  mutateItemForDrag,
+  mutateItemForResize,
+  canDropMap,
+  appendItem,
+} from './utils'
 
 export default function useDropForGrid(gridShape, items, setItems) {
   const ref = useRef(null)
@@ -17,7 +24,11 @@ export default function useDropForGrid(gridShape, items, setItems) {
         const { index, dropCoordinates, gridStep } = prepareParamsForDrop(ref, dropOffset, gridShape, items, item)
 
         if (item.type === ITEM || item.type === BOX) {
-          mutateItemForDrag(items, index, dropCoordinates, gridStep, gridShape)
+          if (index > -1) {
+            mutateItemForDrag(items, index, dropCoordinates, gridStep, gridShape)
+          } else {
+            appendItem(items, item, dropCoordinates, gridStep, gridShape)
+          }
         }
         if (item.type === BOX_RESIZE) {
           mutateItemForResize(items, index, dropCoordinates, gridStep, gridShape)
