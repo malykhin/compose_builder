@@ -12,11 +12,13 @@ export default function useResizeObserver(ref) {
 
   useEffect(() => {
     const { current } = observer
-    if (ref.current) {
+    if (ref.current && current) {
       current.observe(ref.current)
     }
     return () => {
-      current.unobserve()
+      if (current) {
+        current.unobserve()
+      }
     }
   }, [ref, observer])
 

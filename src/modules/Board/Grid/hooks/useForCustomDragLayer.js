@@ -14,8 +14,11 @@ export default function useForCustomDragLayer(itemsIn, ref, gridShape) {
     isDragging: monitor.isDragging(),
   }))
   if (currentOffset && ref.current && item) {
+    const temporaryItemIndex = items.find((it) => _.isUndefined(it.id))
+    if (temporaryItemIndex > -1) {
+      items.splice(temporaryItemIndex, 1)
+    }
     const { index, dropCoordinates, gridStep } = prepareParamsForDrop(ref, currentOffset, gridShape, items, item)
-
     items.forEach((it) => {
       _.set(it, 'isShadowVisible', false)
       _.set(it, 'isShadowDanger', false)
@@ -23,14 +26,28 @@ export default function useForCustomDragLayer(itemsIn, ref, gridShape) {
 
     const dropRect = getDropRectangle(item, dropCoordinates, gridStep, gridShape)
     const isDanger = !canDropMap[item.type](items, dropRect, item)
-    _.set(items, `${index}.isShadowVisible`, true)
-    _.set(items, `${index}.isShadowDanger`, isDanger)
+    if (item.id) {
+      _.set(items, `${index}.isShadowVisible`, true)
+      _.set(items, `${index}.isShadowDanger`, isDanger)
+    } else {
+      items.push({
+        x: item.x,
+        y: item.y,
+        type: item.type,
+        width: item.currentDimensions.width,
+        height: item.currentDimensions.height,
+        isShadowVisible: true,
+        isShadowDanger: isDanger,
+        id: 1,
+      })
+    }
 
+    const correctedIndex = index === -1 ? items.length - 1 : index
     if (item.type === ITEM || item.type === BOX) {
-      mutateItemForDrag(items, index, dropCoordinates, gridStep, gridShape)
+      mutateItemForDrag(items, correctedIndex, dropCoordinates, gridStep, gridShape)
     }
     if (item.type === BOX_RESIZE) {
-      mutateItemForResize(items, index, dropCoordinates, gridStep, gridShape)
+      mutateItemForResize(items, correctedIndex, dropCoordinates, gridStep, gridShape)
     }
   }
 

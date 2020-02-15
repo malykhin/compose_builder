@@ -8,7 +8,7 @@ import useDragForConnector from './hooks/useDragForConnector'
 import useDropForConnector from './hooks/useDropForConnector'
 
 function Item({ x, y, width, height, id, connections, setConnections }) {
-  const { ref, isDragging } = useDragForBlock(id, ITEM)
+  const { ref, isDragging } = useDragForBlock(id, ITEM, { x, y, width, height })
   const { ref: connectorRef } = useDragForConnector(id, ref)
   useDropForConnector(ref, id, connections, setConnections)
 

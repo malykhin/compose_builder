@@ -8,18 +8,6 @@ export default function useDragForBlock(id, type, currentDimensions) {
       type,
       id,
       currentDimensions,
-      ...(() => {
-        if (ref.current) {
-          const { left, top, width, height } = ref.current.getBoundingClientRect()
-          return {
-            left,
-            top,
-            width,
-            height,
-          }
-        }
-        return {}
-      })(),
     },
     collect: (monitor) => ({ isDragging: monitor.isDragging() }),
   })

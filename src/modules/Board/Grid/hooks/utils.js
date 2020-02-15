@@ -150,7 +150,7 @@ export function getDropRectangle(item, dropCoordinates, gridStep, gridShape) {
   return {
     x: convertToPosition(dropCoordinates.x, gridStep.x, gridShape.x),
     y: convertToPosition(dropCoordinates.y, gridStep.y, gridShape.y),
-    width: convertDimension(item.width, gridStep.x),
-    height: convertDimension(item.height, gridStep.y),
+    width: convertDimension(item.width, gridStep.x) || _.get(item, 'currentDimensions.width'),
+    height: convertDimension(item.height, gridStep.y) || _.get(item, 'currentDimensions.height'),
   }
 }
