@@ -16,7 +16,7 @@ function Board({ xBoardSize, yBoardSize }) {
         height: 100%;
       `}
     >
-      <SidePanel />
+      <SidePanel setItems={setItems} items={items} connections={connections} setConnections={setConnections} />
       <Grid
         setItems={setItems}
         items={items}

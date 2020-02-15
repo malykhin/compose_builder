@@ -4,6 +4,7 @@ import { Transition } from 'react-transition-group'
 
 import Item from '../BuildingBlocks/Item'
 import Box from '../BuildingBlocks/Box'
+import DeleteArea from './DeleteArea'
 
 const toggleButtonSize = 36
 const panelTransitionStyles = {
@@ -15,7 +16,7 @@ const panelTransitionStyles = {
 
 const duration = 300
 
-export default function SidePanel() {
+export default function SidePanel({ setItems, items, setConnections, connections }) {
   const [isDisplay, setDisplay] = useState(true)
 
   const toggleDisplay = () => setDisplay(!isDisplay)
@@ -62,12 +63,13 @@ export default function SidePanel() {
                 height: 100%;
                 display: grid;
                 grid-template-columns: 8px auto 8px;
-                grid-template-rows: repeat(4, 15%);
+                grid-template-rows: repeat(8, 10%);
                 grid-row-gap: 16px;
               `}
             >
               <Item x={2} y={1} height={1} width={1} />
               <Box x={2} y={2} height={2} width={1} />
+              <DeleteArea setItems={setItems} items={items} connections={connections} setConnections={setConnections} />
             </div>
           </div>
         )}

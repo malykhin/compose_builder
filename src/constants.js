@@ -1,5 +1,5 @@
 export const X_BOARD_SIZE = 20
-export const Y_BOARD_SIZE = 10
+export const Y_BOARD_SIZE = 16
 
 export const MIN_BOX_HEIGHT = 2
 export const MIN_BOX_WIDTH = 1
