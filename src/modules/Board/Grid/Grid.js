@@ -8,7 +8,7 @@ import CustomDragLayer from './CustomDragLayer'
 import useDropForGrid from './hooks/useDropForGrid'
 import useResizeObserver from 'use-resize-observer'
 
-export default function Grid({ gridShape, items, setItems, connections, setConnections }) {
+export default function Grid({ gridShape, items, setItems, connections, setConnections, setItemToEditId }) {
   const { ref: measuredRef, width = 1, height = 1 } = useResizeObserver()
   const { ref } = useDropForGrid(measuredRef, gridShape, items, setItems)
 
@@ -41,7 +41,12 @@ export default function Grid({ gridShape, items, setItems, connections, setConne
           connections={connections}
           gridDimensions={gridDimensions}
         />
-        <Blocks items={items} connections={connections} setConnections={setConnections} />
+        <Blocks
+          items={items}
+          connections={connections}
+          setConnections={setConnections}
+          setItemToEditId={setItemToEditId}
+        />
       </div>
     </div>
   )

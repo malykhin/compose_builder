@@ -1,12 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { css } from '@emotion/core'
 import { Transition } from 'react-transition-group'
 
-import Item from '../BuildingBlocks/Item'
-import Box from '../BuildingBlocks/Box'
-import DeleteArea from './DeleteArea'
-
-import { CONTAINER, VOLUME, PROXY } from '../../../constants'
+import BlocksManager from './BlocksManager'
+import BlockEditor from './BlockEditor'
 
 const toggleButtonSize = 36
 const panelTransitionStyles = {
@@ -18,11 +15,17 @@ const panelTransitionStyles = {
 
 const duration = 300
 
-export default function SidePanel({ setItems, items, setConnections, connections }) {
+export default function SidePanel({ setItems, items, setConnections, connections, itemToEditId, setItemToEditId }) {
   const [isDisplay, setDisplay] = useState(true)
 
   const toggleDisplay = () => setDisplay(!isDisplay)
 
+  useEffect(() => {
+    setDisplay(true)
+  }, [itemToEditId])
+
+  const isBlocksManagerVisible = isDisplay && !itemToEditId
+  const isBlockEditorVisible = isDisplay && itemToEditId
   return (
     <>
       <Transition in={isDisplay} timeout={duration}>
@@ -39,42 +42,49 @@ export default function SidePanel({ setItems, items, setConnections, connections
               margin-right: 12px;
             `}
           >
-            <button
-              onClick={toggleDisplay}
-              css={css`
-                background-color: transparent;
-                border: 1px solid #eee;
-                cursor: pointer;
-                width: ${toggleButtonSize}px;
-                height: ${toggleButtonSize}px;
-                outline: none;
-                margin-right: 4px;
-                font-size: 20px;
-                align-self: flex-end;
-                &:hover {
-                  background-color: #ccc;
-                }
-              `}
-            >
-              {isDisplay ? <>&larr;</> : <>&rarr;</>}
-            </button>
-            <div
-              css={css`
-                margin-top: 16px;
-                width: 100%;
-                height: 100%;
-                display: grid;
-                grid-template-columns: 8px auto 8px;
-                grid-template-rows: repeat(8, 10%);
-                grid-row-gap: 16px;
-              `}
-            >
-              <Item x={2} y={1} height={1} width={1} kind={CONTAINER} />
-              <Item x={2} y={2} height={1} width={1} kind={VOLUME} />
-              <Item x={2} y={3} height={1} width={1} kind={PROXY} />
-              <Box x={2} y={4} height={2} width={1} />
-              <DeleteArea setItems={setItems} items={items} connections={connections} setConnections={setConnections} />
-            </div>
+            {!isBlockEditorVisible && (
+              <>
+                <button
+                  onClick={toggleDisplay}
+                  css={css`
+                    background-color: transparent;
+                    border: 1px solid #eee;
+                    cursor: pointer;
+                    width: ${toggleButtonSize}px;
+                    height: ${toggleButtonSize}px;
+                    outline: none;
+                    margin-right: 4px;
+                    font-size: 20px;
+                    align-self: flex-end;
+                    &:hover {
+                      background-color: #ccc;
+                    }
+                  `}
+                >
+                  {isDisplay ? <>&larr;</> : <>&rarr;</>}
+                </button>
+
+                <hr
+                  css={css`
+                    width: 90%;
+                    height: 1px;
+                    border: none;
+                    background-color: #eee;
+                    margin-top: 8px;
+                    margin-bottom: 0px;
+                  `}
+                />
+              </>
+            )}
+            {isBlocksManagerVisible && (
+              <BlocksManager
+                setItems={setItems}
+                items={items}
+                connections={connections}
+                setConnections={setConnections}
+              />
+            )}
+            {isBlockEditorVisible && <BlockEditor itemToEditId={itemToEditId} setItemToEditId={setItemToEditId} />}
           </div>
         )}
       </Transition>

@@ -8,9 +8,11 @@ import { BOX } from '../../../constants'
 import useDragForBlock from './hooks/useDragForBlock'
 import useResizeForBox from './hooks/useResizeForBox'
 
-function Box({ x, y, width, height, id }) {
+function Box({ x, y, width, height, id, setItemToEditId = () => {} }) {
   const { ref: boxRef, isDragging: isBoxDragging } = useDragForBlock(id, BOX, null, { x, y, width, height })
   const { ref: resizeRef, isDragging: isResizeDragging } = useResizeForBox(id, boxRef, { x, y })
+
+  const _setItemToEditId = () => setItemToEditId(id)
 
   return (
     <div
@@ -37,6 +39,7 @@ function Box({ x, y, width, height, id }) {
         `}
       />
       <div
+        onClick={_setItemToEditId}
         css={css`
           cursor: ${isBoxDragging ? 'grabbing' : 'pointer'};
           display: inline-block;

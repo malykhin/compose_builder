@@ -10,12 +10,20 @@ const blocksMap = {
   [BOX]: Box,
 }
 
-export default function Blocks({ items, connections, setConnections }) {
+export default function Blocks({ items, connections, setConnections, setItemToEditId }) {
   return (
     <>
       {items.map((item) => {
         const Component = blocksMap[item.type]
-        return <Component key={item.id} {...item} connections={connections} setConnections={setConnections} />
+        return (
+          <Component
+            key={item.id}
+            {...item}
+            connections={connections}
+            setConnections={setConnections}
+            setItemToEditId={setItemToEditId}
+          />
+        )
       })}
     </>
   )

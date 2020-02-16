@@ -16,7 +16,7 @@ const iconsMap = {
   [PROXY]: ProxyItem,
 }
 
-function Item({ x, y, width, height, id, connections, setConnections, kind }) {
+function Item({ x, y, width, height, id, connections, setConnections, kind, setItemToEditId = () => {} }) {
   const { ref, isDragging } = useDragForBlock(id, ITEM, kind, { x, y, width, height })
   const { ref: connectorRef } = useDragForConnector(id, ref)
   useDropForConnector(ref, id, connections, setConnections)
@@ -24,9 +24,12 @@ function Item({ x, y, width, height, id, connections, setConnections, kind }) {
   const KindIcon = iconsMap[kind]
   const canConnect = kind === CONTAINER
 
+  const _setItemToEditId = () => setItemToEditId(id)
+
   return (
     <div
       ref={ref}
+      onClick={_setItemToEditId}
       css={css`
         cursor: ${isDragging ? 'grabbing' : 'pointer'};
         margin: 2px;
