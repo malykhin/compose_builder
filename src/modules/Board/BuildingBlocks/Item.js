@@ -3,8 +3,9 @@ import { css } from '@emotion/core'
 
 import Container from './Container'
 import Folder from './Folder'
+import ProxyItem from './ProxyItem'
 
-import { ITEM, CONTAINER, VOLUME } from '../../../constants'
+import { ITEM, CONTAINER, VOLUME, PROXY } from '../../../constants'
 import useDragForBlock from './hooks/useDragForBlock'
 import useDragForConnector from './hooks/useDragForConnector'
 import useDropForConnector from './hooks/useDropForConnector'
@@ -12,6 +13,7 @@ import useDropForConnector from './hooks/useDropForConnector'
 const iconsMap = {
   [CONTAINER]: Container,
   [VOLUME]: Folder,
+  [PROXY]: ProxyItem,
 }
 
 function Item({ x, y, width, height, id, connections, setConnections, kind }) {

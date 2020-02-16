@@ -11,3 +11,4 @@ export const CONNECTOR = Symbol('CONNECTOR')
 
 export const CONTAINER = Symbol('CONTAINER')
 export const VOLUME = Symbol('VOLUME')
+export const PROXY = Symbol('PROXY')
