@@ -9,7 +9,7 @@ import useDragForBlock from './hooks/useDragForBlock'
 import useResizeForBox from './hooks/useResizeForBox'
 
 function Box({ x, y, width, height, id }) {
-  const { ref: boxRef, isDragging: isBoxDragging } = useDragForBlock(id, BOX, { x, y, width, height })
+  const { ref: boxRef, isDragging: isBoxDragging } = useDragForBlock(id, BOX, null, { x, y, width, height })
   const { ref: resizeRef, isDragging: isResizeDragging } = useResizeForBox(id, boxRef, { x, y })
 
   return (

@@ -6,6 +6,8 @@ import Item from '../BuildingBlocks/Item'
 import Box from '../BuildingBlocks/Box'
 import DeleteArea from './DeleteArea'
 
+import { CONTAINER, VOLUME } from '../../../constants'
+
 const toggleButtonSize = 36
 const panelTransitionStyles = {
   entering: 0,
@@ -67,8 +69,9 @@ export default function SidePanel({ setItems, items, setConnections, connections
                 grid-row-gap: 16px;
               `}
             >
-              <Item x={2} y={1} height={1} width={1} />
-              <Box x={2} y={2} height={2} width={1} />
+              <Item x={2} y={1} height={1} width={1} kind={CONTAINER} />
+              <Item x={2} y={2} height={1} width={1} kind={VOLUME} />
+              <Box x={2} y={3} height={2} width={1} />
               <DeleteArea setItems={setItems} items={items} connections={connections} setConnections={setConnections} />
             </div>
           </div>

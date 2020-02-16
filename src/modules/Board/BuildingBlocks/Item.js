@@ -1,15 +1,26 @@
 import React from 'react'
 import { css } from '@emotion/core'
 
-import { ITEM } from '../../../constants'
+import Container from './Container'
+import Folder from './Folder'
+
+import { ITEM, CONTAINER, VOLUME } from '../../../constants'
 import useDragForBlock from './hooks/useDragForBlock'
 import useDragForConnector from './hooks/useDragForConnector'
 import useDropForConnector from './hooks/useDropForConnector'
 
-function Item({ x, y, width, height, id, connections, setConnections }) {
-  const { ref, isDragging } = useDragForBlock(id, ITEM, { x, y, width, height })
+const iconsMap = {
+  [CONTAINER]: Container,
+  [VOLUME]: Folder,
+}
+
+function Item({ x, y, width, height, id, connections, setConnections, kind }) {
+  const { ref, isDragging } = useDragForBlock(id, ITEM, kind, { x, y, width, height })
   const { ref: connectorRef } = useDragForConnector(id, ref)
   useDropForConnector(ref, id, connections, setConnections)
+
+  const KindIcon = iconsMap[kind]
+  const canConnect = kind === CONTAINER
 
   return (
     <div
@@ -24,6 +35,7 @@ function Item({ x, y, width, height, id, connections, setConnections }) {
         grid-row-end: ${y + width};
         display: flex;
         flex-direction: column;
+        justify-content: ${id && canConnect ? 'space-between' : 'center'};
         border: 1px solid #777;
         border-radius: 2px;
         z-index: 4;
@@ -32,12 +44,13 @@ function Item({ x, y, width, height, id, connections, setConnections }) {
         }
       `}
     >
-      {id && (
+      {id && canConnect && (
         <div
           ref={connectorRef}
           css={css`
             border: 1px solid #777;
             border-radius: 50%;
+            flex-shrink: 0;
             height: 10px;
             width: 10px;
             align-self: flex-end;
@@ -48,6 +61,15 @@ function Item({ x, y, width, height, id, connections, setConnections }) {
             }
           `}
         />
+      )}
+      {KindIcon && (
+        <div
+          css={css`
+            align-self: center;
+          `}
+        >
+          <KindIcon />
+        </div>
       )}
     </div>
   )

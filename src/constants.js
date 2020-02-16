@@ -8,3 +8,6 @@ export const ITEM = Symbol('ITEM')
 export const BOX = Symbol('BOX')
 export const BOX_RESIZE = Symbol('BOX_RESIZE')
 export const CONNECTOR = Symbol('CONNECTOR')
+
+export const CONTAINER = Symbol('CONTAINER')
+export const VOLUME = Symbol('VOLUME')

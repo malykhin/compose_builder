@@ -50,6 +50,7 @@ function itemFactory(x, y, item) {
   const itemMap = {
     [ITEM]: {
       ...defaultItem,
+      kind: item.kind,
       height: 1,
     },
     [BOX]: {
@@ -99,8 +100,8 @@ export function canDropItem(items, dropRect, item) {
 }
 
 export function canDropBox(items, dropRect, item) {
-  const dropWidth = dropRect.width || item.currentDimensions.width
-  const dropHeight = dropRect.height || item.currentDimensions.height
+  const dropWidth = dropRect.width || _.get(item, 'currentDimensions.width')
+  const dropHeight = dropRect.height || _.get(item, 'currentDimensions.height')
   if (!dropWidth || !dropHeight) {
     return false
   }

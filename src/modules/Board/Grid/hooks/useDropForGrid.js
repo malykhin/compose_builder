@@ -1,4 +1,3 @@
-import { useRef } from 'react'
 import { useDrop } from 'react-dnd'
 import _ from 'lodash'
 
@@ -12,9 +11,7 @@ import {
   appendItem,
 } from './utils'
 
-export default function useDropForGrid(gridShape, items, setItems) {
-  const ref = useRef(null)
-
+export default function useDropForGrid(ref, gridShape, items, setItems) {
   const [, drop] = useDrop({
     accept: [ITEM, BOX, BOX_RESIZE, CONNECTOR],
     drop: (item, monitor) => {
