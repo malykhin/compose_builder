@@ -1,8 +1,11 @@
 import React from 'react'
 import { css } from '@emotion/core'
 
-export default function BlockEditor({ itemToEditId, setItemToEditId }) {
+import MetaForm from './MetaForm'
+
+export default function BlockEditor({ items, connections, itemToEditId, setItemToEditId }) {
   const goBack = () => setItemToEditId(null)
+  const item = items.find((item) => item.id === itemToEditId)
   return (
     <div
       css={css`
@@ -33,7 +36,7 @@ export default function BlockEditor({ itemToEditId, setItemToEditId }) {
           margin-top: 8px;
         `}
       >
-        {itemToEditId}
+        <MetaForm item={item} />
       </div>
     </div>
   )

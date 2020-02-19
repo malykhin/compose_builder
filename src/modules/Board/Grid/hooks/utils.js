@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import uuid from 'uuid'
 
-import { MIN_BOX_HEIGHT, MIN_BOX_WIDTH, ITEM, BOX, BOX_RESIZE, CONNECTOR } from '../../../../constants'
+import { MIN_BOX_HEIGHT, MIN_BOX_WIDTH, ITEM, BOX, BOX_RESIZE, CONNECTOR, NETWORK } from '../../../../constants'
 
 export function convertToPosition(coordinate, step, maxSteps) {
   const position = Math.ceil(coordinate / step)
@@ -55,6 +55,7 @@ function itemFactory(x, y, item) {
     },
     [BOX]: {
       ...defaultItem,
+      kind: NETWORK,
       height: 2,
     },
   }

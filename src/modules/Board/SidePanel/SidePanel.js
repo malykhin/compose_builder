@@ -84,7 +84,14 @@ export default function SidePanel({ setItems, items, setConnections, connections
                 setConnections={setConnections}
               />
             )}
-            {isBlockEditorVisible && <BlockEditor itemToEditId={itemToEditId} setItemToEditId={setItemToEditId} />}
+            {isBlockEditorVisible && (
+              <BlockEditor
+                items={items}
+                connections={connections}
+                itemToEditId={itemToEditId}
+                setItemToEditId={setItemToEditId}
+              />
+            )}
           </div>
         )}
       </Transition>
