@@ -38,12 +38,14 @@ function Item({ x, y, width, height, id, connections, setConnections, kind, setI
         grid-column-end: ${x + height};
         grid-row-start: ${y};
         grid-row-end: ${y + width};
-        display: flex;
-        flex-direction: column;
-        justify-content: ${id && canConnect ? 'space-between' : 'center'};
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: 100%;
         border: 1px solid #777;
         border-radius: 2px;
         z-index: 4;
+        min-height: 30px;
+        min-width: 50px;
         &:hover {
           background-color: #ccc;
         }
@@ -55,10 +57,12 @@ function Item({ x, y, width, height, id, connections, setConnections, kind, setI
           css={css`
             border: 1px solid #777;
             border-radius: 50%;
-            flex-shrink: 0;
+            grid-column: 1;
+            grid-row: 1;
             height: 10px;
             width: 10px;
-            align-self: flex-end;
+            justify-self: end;
+            align-self: start;
             box-sizing: border-box;
             z-index: 6;
             &:hover {
@@ -70,7 +74,15 @@ function Item({ x, y, width, height, id, connections, setConnections, kind, setI
       {KindIcon && (
         <div
           css={css`
+            min-width: 24px;
+            min-height: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
             align-self: center;
+            justify-self: center;
+            grid-column: 1;
+            grid-row: 1;
           `}
         >
           <KindIcon />

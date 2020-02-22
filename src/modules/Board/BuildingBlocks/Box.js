@@ -8,7 +8,7 @@ import { BOX } from '../../../constants'
 import useDragForBlock from './hooks/useDragForBlock'
 import useResizeForBox from './hooks/useResizeForBox'
 
-function Box({ x, y, width, height, id, setItemToEditId = () => {} }) {
+function Box({ x, y, width, height, id, name = 'Network', setItemToEditId = () => {} }) {
   const { ref: boxRef, isDragging: isBoxDragging } = useDragForBlock(id, BOX, null, { x, y, width, height })
   const { ref: resizeRef, isDragging: isResizeDragging } = useResizeForBox(id, boxRef, { x, y })
 
@@ -55,7 +55,7 @@ function Box({ x, y, width, height, id, setItemToEditId = () => {} }) {
           }
         `}
       >
-        Mark
+        {name}
       </div>
       {id && <ResizeMark resizeRef={resizeRef} isDragging={isResizeDragging} rowStart={height} columnStart={width} />}
     </div>

@@ -40,6 +40,7 @@ export default function SidePanel({ setItems, items, setConnections, connections
               flex-direction: column;
               justify-content: flex-start;
               margin-right: 12px;
+              min-width: 140px;
             `}
           >
             {!isBlockEditorVisible && (

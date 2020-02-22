@@ -11,6 +11,10 @@ function App() {
     <DndProvider backend={HTML5Backend}>
       <Global
         styles={css`
+          * {
+            font-family: Helvetica, sans-serif;
+          }
+
           html,
           body,
           #root {
