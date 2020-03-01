@@ -21,14 +21,12 @@ export default function Grid({ gridShape, items, setItems, connections, setConne
       ref={measuredRef}
       css={css`
         width: 100%;
-        height: 100%;
       `}
     >
       <div
         ref={ref}
         css={css`
           width: 100%;
-          height: 100%;
           display: grid;
           grid-template-columns: repeat(${x}, ${100 / x}%);
           grid-template-rows: repeat(${y}, ${100 / y}%);

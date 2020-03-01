@@ -23,7 +23,7 @@ export default function BlockEditor({ items, connections, itemToEditId, setItemT
           cursor: pointer;
           height: 36px;
           outline: none;
-          font-size: 20px;
+          font-size: 16px;
           &:hover {
             background-color: #ccc;
           }

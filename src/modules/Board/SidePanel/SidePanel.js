@@ -9,8 +9,8 @@ const toggleButtonSize = 36
 const panelTransitionStyles = {
   entering: 0,
   entered: 0,
-  exiting: `calc(-10% + ${toggleButtonSize}px)`,
-  exited: `calc(-10% + ${toggleButtonSize}px)`,
+  exiting: `calc(-10% + ${toggleButtonSize + 8}px)`,
+  exited: `calc(-10% + ${toggleButtonSize + 8}px)`,
 }
 
 const duration = 300
@@ -27,56 +27,29 @@ export default function SidePanel({ setItems, items, setConnections, connections
   const isBlocksManagerVisible = isDisplay && !itemToEditId
   const isBlockEditorVisible = isDisplay && itemToEditId
   return (
-    <>
-      <Transition in={isDisplay} timeout={duration}>
-        {(state) => (
+    <Transition in={isDisplay} timeout={duration}>
+      {(state) => (
+        <div
+          css={css`
+            margin-left: ${panelTransitionStyles[state]};
+            transition: margin-left ${duration}ms ease-in-out;
+            display: flex;
+            flex-direction: row;
+            width: 10%;
+            min-width: 140px;
+            justify-content: space-between;
+            height: 100%;
+          `}
+        >
           <div
             css={css`
-              width: 10%;
-              transition: margin-left ${duration}ms ease-in-out;
-              margin-left: ${panelTransitionStyles[state]};
-              border-right: 1px solid #eee;
+              width: 100%;
+              border-right: ${isDisplay ? '1px solid #eee' : 'none'};
               display: flex;
               flex-direction: column;
               justify-content: flex-start;
-              margin-right: 12px;
-              min-width: 140px;
             `}
           >
-            {!isBlockEditorVisible && (
-              <>
-                <button
-                  onClick={toggleDisplay}
-                  css={css`
-                    background-color: transparent;
-                    border: 1px solid #eee;
-                    cursor: pointer;
-                    width: ${toggleButtonSize}px;
-                    height: ${toggleButtonSize}px;
-                    outline: none;
-                    margin-right: 4px;
-                    font-size: 20px;
-                    align-self: flex-end;
-                    &:hover {
-                      background-color: #ccc;
-                    }
-                  `}
-                >
-                  {isDisplay ? <>&larr;</> : <>&rarr;</>}
-                </button>
-
-                <hr
-                  css={css`
-                    width: 90%;
-                    height: 1px;
-                    border: none;
-                    background-color: #eee;
-                    margin-top: 8px;
-                    margin-bottom: 0px;
-                  `}
-                />
-              </>
-            )}
             {isBlocksManagerVisible && (
               <BlocksManager
                 setItems={setItems}
@@ -94,8 +67,28 @@ export default function SidePanel({ setItems, items, setConnections, connections
               />
             )}
           </div>
-        )}
-      </Transition>
-    </>
+          <button
+            onClick={toggleDisplay}
+            css={css`
+              background-color: transparent;
+              border: 1px solid #eee;
+              cursor: pointer;
+              width: ${toggleButtonSize}px;
+              height: ${toggleButtonSize}px;
+              outline: none;
+              margin-right: 4px;
+              font-size: 20px;
+              align-self: flex-start;
+
+              &:hover {
+                background-color: #ccc;
+              }
+            `}
+          >
+            {isDisplay ? <>&larr;</> : <>&rarr;</>}
+          </button>
+        </div>
+      )}
+    </Transition>
   )
 }

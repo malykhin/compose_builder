@@ -32,7 +32,7 @@ function Item({ x, y, width, height, id, connections, setConnections, kind, setI
       onClick={_setItemToEditId}
       css={css`
         cursor: ${isDragging ? 'grabbing' : 'pointer'};
-        margin: 2px;
+        margin: 4px;
         opacity: ${isDragging ? 0 : 1};
         grid-column-start: ${x};
         grid-column-end: ${x + height};
@@ -44,7 +44,6 @@ function Item({ x, y, width, height, id, connections, setConnections, kind, setI
         border: 1px solid #777;
         border-radius: 2px;
         z-index: 4;
-        min-height: 30px;
         min-width: 50px;
         &:hover {
           background-color: #ccc;
