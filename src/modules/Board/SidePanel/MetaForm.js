@@ -6,34 +6,37 @@ import MetaField from './MetaField'
 
 import { CONTAINER, VOLUME, PROXY, NETWORK } from '../../../constants'
 
-import container from '../../../itemsParamsDefinitions/container'
-import network from '../../../itemsParamsDefinitions/network'
-import proxy from '../../../itemsParamsDefinitions/proxy'
-import volume from '../../../itemsParamsDefinitions/volume'
+import { definition as containerDefinition } from '../../../itemsParamsDefinitions/container'
+import { definition as networkDefinition } from '../../../itemsParamsDefinitions/network'
+import { definition as proxyDefinition } from '../../../itemsParamsDefinitions/proxy'
+import { definition as volumeDefinition } from '../../../itemsParamsDefinitions/volume'
 
 const modelsMap = {
-  [CONTAINER]: container,
-  [NETWORK]: network,
-  [VOLUME]: volume,
-  [PROXY]: proxy,
+  [CONTAINER]: containerDefinition,
+  [NETWORK]: networkDefinition,
+  [VOLUME]: volumeDefinition,
+  [PROXY]: proxyDefinition,
 }
 
-export default function MetaForm({ item, initialValues = {} }) {
+export default function MetaForm({ item, initialValues = {}, setItem, goBack }) {
   const model = modelsMap[item.kind]
   const fields = Object.entries(model)
-  const mergedInitialValues = { ..._.mapValues(model, () => ''), ...initialValues }
+
+  const mergedInitialValues = { ..._.mapValues(model, () => ''), ...initialValues, ...item }
   return (
     <Formik
       initialValues={mergedInitialValues}
+      enableReinitialize
       onSubmit={(values, { setSubmitting }) => {
-        console.log(values)
+        setItem({ ...item, ...values })
         setSubmitting(false)
+        goBack()
       }}
     >
-      {({ isSubmitting }) => (
+      {({ isSubmitting, values }) => (
         <Form>
           {fields.map(([name, definition]) => (
-            <MetaField key={name} name={name} definition={definition} />
+            <MetaField key={name} name={name} definition={definition} value={values[name]} />
           ))}
           <button type="submit" disabled={isSubmitting}>
             Submit

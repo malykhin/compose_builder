@@ -1,7 +1,9 @@
 import React from 'react'
 import { css } from '@emotion/core'
 
-function TopPanel() {
+function TopPanel({ saveFile, items, connections }) {
+  const saveHandler = () => saveFile(items, connections)
+
   return (
     <div
       css={css`
@@ -15,7 +17,7 @@ function TopPanel() {
       `}
     >
       <button
-        onClick={() => {}}
+        onClick={saveHandler}
         css={css`
           margin-left: 20px;
           background-color: transparent;

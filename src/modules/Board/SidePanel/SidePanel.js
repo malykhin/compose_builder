@@ -15,7 +15,15 @@ const panelTransitionStyles = {
 
 const duration = 300
 
-export default function SidePanel({ setItems, items, setConnections, connections, itemToEditId, setItemToEditId }) {
+export default function SidePanel({
+  setItems,
+  items,
+  setConnections,
+  connections,
+  itemToEditId,
+  setItemToEditId,
+  setItem,
+}) {
   const [isDisplay, setDisplay] = useState(true)
 
   const toggleDisplay = () => setDisplay(!isDisplay)
@@ -36,7 +44,7 @@ export default function SidePanel({ setItems, items, setConnections, connections
             display: flex;
             flex-direction: row;
             width: 10%;
-            min-width: 140px;
+            min-width: 160px;
             justify-content: space-between;
             height: 100%;
           `}
@@ -64,6 +72,7 @@ export default function SidePanel({ setItems, items, setConnections, connections
                 connections={connections}
                 itemToEditId={itemToEditId}
                 setItemToEditId={setItemToEditId}
+                setItem={setItem}
               />
             )}
           </div>

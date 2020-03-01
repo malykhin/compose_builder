@@ -3,14 +3,15 @@ import { css } from '@emotion/core'
 
 import MetaForm from './MetaForm'
 
-export default function BlockEditor({ items, connections, itemToEditId, setItemToEditId }) {
+export default function BlockEditor({ items, itemToEditId, setItemToEditId, setItem }) {
   const goBack = () => setItemToEditId(null)
-  const item = items.find((item) => item.id === itemToEditId)
+  const item = { ...items.find((item) => item.id === itemToEditId) }
   return (
     <div
       css={css`
         display: flex;
         flex-direction: column;
+        padding: 16px;
       `}
     >
       <button
@@ -36,7 +37,7 @@ export default function BlockEditor({ items, connections, itemToEditId, setItemT
           margin-top: 8px;
         `}
       >
-        <MetaForm item={item} />
+        <MetaForm item={item} setItem={setItem} goBack={goBack} />
       </div>
     </div>
   )

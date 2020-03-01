@@ -1,14 +1,25 @@
 import React, { useState } from 'react'
 import { css } from '@emotion/core'
+import _ from 'lodash'
 
 import Grid from './Grid/Grid'
 import SidePanel from './SidePanel/SidePanel'
 import TopPanel from './TopPanel/TopPanel'
 
+import { saveFile } from './utils'
+
 function Board({ xBoardSize, yBoardSize }) {
   const [items, setItems] = useState([])
   const [connections, setConnections] = useState([])
   const [itemToEditId, setItemToEditId] = useState(null)
+
+  const setItem = (item) => {
+    const clonedItems = _.cloneDeep(items)
+    const index = clonedItems.findIndex((it) => it.id === item.id)
+
+    clonedItems[index] = _.cloneDeep(item)
+    setItems(clonedItems)
+  }
   return (
     <div
       css={css`
@@ -17,7 +28,7 @@ function Board({ xBoardSize, yBoardSize }) {
         grid-template-rows: 8vh 92vh;
       `}
     >
-      <TopPanel />
+      <TopPanel saveFile={saveFile} items={items} connections={connections} />
       <div
         css={css`
           display: flex;
@@ -29,6 +40,7 @@ function Board({ xBoardSize, yBoardSize }) {
       >
         <SidePanel
           setItems={setItems}
+          setItem={setItem}
           items={items}
           connections={connections}
           setConnections={setConnections}

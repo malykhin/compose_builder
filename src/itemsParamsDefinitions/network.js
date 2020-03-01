@@ -1,4 +1,6 @@
-export default {
+import _ from 'lodash'
+
+export const definition = {
   name: {
     type: 'string',
     uniq: true,
@@ -12,3 +14,5 @@ export default {
     },
   },
 }
+
+export const keys = Object.keys(_.omit(definition, ['name']))
