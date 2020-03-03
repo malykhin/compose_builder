@@ -1,12 +1,16 @@
 import _ from 'lodash'
 
+import { STRING, NETWORK } from '../constants'
+
+export const kind = NETWORK
+
 export const definition = {
   name: {
-    type: 'string',
-    uniq: true,
+    type: STRING,
+    uniq: [NETWORK],
   },
   network_mode: {
-    type: 'string',
+    type: STRING,
     values: {
       bridge: 'bridge',
       host: 'host',

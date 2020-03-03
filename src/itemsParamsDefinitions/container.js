@@ -1,46 +1,49 @@
 import _ from 'lodash'
+import { STRING, CONTAINER, PROXY, ARRAY, KEY_VALUE, LINK, VOLUME } from '../constants'
+
+export const kind = CONTAINER
 
 export const definition = {
   name: {
-    type: 'string',
-    uniq: ['container', 'proxy'],
+    type: STRING,
+    uniq: [CONTAINER, PROXY],
   },
   image: {
-    type: 'string',
+    type: STRING,
   },
   env: {
-    type: 'array',
+    type: ARRAY,
     element: {
-      type: 'key_value',
+      type: KEY_VALUE,
     },
   },
   command: {
-    type: 'string',
+    type: STRING,
   },
   entrypoint: {
-    type: 'string',
+    type: STRING,
   },
   build: {
-    type: 'string',
+    type: STRING,
   },
   labels: {
-    type: 'array',
+    type: ARRAY,
     element: {
-      type: 'string',
+      type: STRING,
     },
   },
   container_name: {
-    type: 'string',
+    type: STRING,
   },
   depends_on: {
-    type: 'array',
+    type: ARRAY,
     element: {
-      type: 'link',
-      source: 'container',
+      type: LINK,
+      source: [CONTAINER, PROXY],
     },
   },
   restart: {
-    type: 'string',
+    type: STRING,
     values: {
       no: 'no',
       always: 'always',
@@ -48,11 +51,12 @@ export const definition = {
       'unless-stopped': 'unless-stopped',
     },
   },
-  volume: {
-    type: 'array',
+  volumes: {
+    type: ARRAY,
     element: {
-      type: 'link',
-      source: 'volume',
+      readOnly: true,
+      type: LINK,
+      source: [VOLUME],
     },
   },
 }

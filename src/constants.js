@@ -16,3 +16,8 @@ export const NETWORK = Symbol('NETWORK')
 
 export const BLOCK_BUILDER = Symbol('BLOCK_BUILDER')
 export const BLOCK_EDITOR = Symbol('BLOCK_EDITOR')
+
+export const STRING = Symbol('STRING')
+export const ARRAY = Symbol('ARRAY')
+export const KEY_VALUE = Symbol('KEY_VALUE')
+export const LINK = Symbol('LINK')

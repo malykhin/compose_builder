@@ -1,24 +1,46 @@
 import React from 'react'
 import { css } from '@emotion/core'
 import { Field } from 'formik'
+import _ from 'lodash'
 
-function getField(name, definition, value) {
-  if (definition.values) {
-    return (
-      <Field as="select" name={name} value={value}>
-        {Object.values(definition.values).map((value) => (
-          <option key={value} value={value}>
-            {value}
-          </option>
-        ))}
-      </Field>
-    )
-  } else {
-    return <Field name={name} value={value} />
+import FormSelect from './FormSelect'
+
+import { STRING, ARRAY, KEY_VALUE, LINK } from '../../../constants'
+
+function getField(name, definition, value, links) {
+  if (definition.type === STRING) {
+    if (definition.values) {
+      const values = Object.values(definition.values)
+      return <FormSelect name={name} value={value} values={values} />
+    } else {
+      return <Field name={name} value={value} />
+    }
   }
+  if (definition.type === ARRAY) {
+    const elementType = _.get(definition, 'element.type')
+    if (elementType === STRING) {
+      // creatable field
+    }
+    if (elementType === LINK) {
+      const source = _.get(definition, 'element.source', [])
+      const readOnly = _.get(definition, 'element.readOnly')
+
+      const values = _.chain(source)
+        .map((item) => links[item])
+        .flattenDeep()
+        .value()
+
+      return <FormSelect name={name} value={value} values={values} readOnly={readOnly} />
+    }
+    if (elementType === KEY_VALUE) {
+      // creatable key-value fields
+    }
+  }
+
+  return null
 }
 
-export default function MetaField({ name, definition, value }) {
+export default function MetaField({ name, definition, value, links }) {
   return (
     <div
       css={css`
@@ -32,7 +54,7 @@ export default function MetaField({ name, definition, value }) {
       >
         {name}
       </div>
-      {getField(name, definition, value)}
+      {getField(name, definition, value, links)}
     </div>
   )
 }

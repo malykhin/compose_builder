@@ -1,15 +1,19 @@
 import _ from 'lodash'
 
+import { STRING, VOLUME } from '../constants'
+
+export const kind = VOLUME
+
 export const definition = {
   name: {
-    type: 'string',
-    uniq: true,
+    type: STRING,
+    uniq: [VOLUME],
   },
-  from: {
-    type: 'string',
+  local: {
+    type: STRING,
   },
-  to: {
-    type: 'string',
+  container: {
+    type: STRING,
   },
 }
 

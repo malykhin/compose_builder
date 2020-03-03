@@ -18,7 +18,7 @@ const modelsMap = {
   [PROXY]: proxyDefinition,
 }
 
-export default function MetaForm({ item, initialValues = {}, setItem, goBack }) {
+export default function MetaForm({ item, initialValues = {}, setItem, goBack, links }) {
   const model = modelsMap[item.kind]
   const fields = Object.entries(model)
 
@@ -36,7 +36,7 @@ export default function MetaForm({ item, initialValues = {}, setItem, goBack }) 
       {({ isSubmitting, values }) => (
         <Form>
           {fields.map(([name, definition]) => (
-            <MetaField key={name} name={name} definition={definition} value={values[name]} />
+            <MetaField key={name} name={name} definition={definition} value={values[name]} links={links} />
           ))}
           <button type="submit" disabled={isSubmitting}>
             Submit
