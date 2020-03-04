@@ -1,5 +1,5 @@
-import React from 'react'
-import { Formik, Form } from 'formik'
+import React, { useEffect } from 'react'
+import { Formik, Form, useFormikContext } from 'formik'
 import _ from 'lodash'
 
 import MetaField from './MetaField'
@@ -18,29 +18,33 @@ const modelsMap = {
   [PROXY]: proxyDefinition,
 }
 
+const AutoSubmit = () => {
+  const { values, submitForm } = useFormikContext()
+  useEffect(() => {
+    submitForm()
+  }, [values, submitForm])
+  return null
+}
+
 export default function MetaForm({ item, initialValues = {}, setItem, goBack, links }) {
   const model = modelsMap[item.kind]
   const fields = Object.entries(model)
 
   const mergedInitialValues = { ..._.mapValues(model, () => ''), ...initialValues, ...item }
+
+  const handleSubmit = (values, { setSubmitting }) => {
+    setItem({ ...item, ...values })
+    setSubmitting(false)
+  }
+
   return (
-    <Formik
-      initialValues={mergedInitialValues}
-      enableReinitialize
-      onSubmit={(values, { setSubmitting }) => {
-        setItem({ ...item, ...values })
-        setSubmitting(false)
-        goBack()
-      }}
-    >
-      {({ isSubmitting, values }) => (
+    <Formik initialValues={mergedInitialValues} enableReinitialize onSubmit={handleSubmit}>
+      {({ values }) => (
         <Form>
           {fields.map(([name, definition]) => (
             <MetaField key={name} name={name} definition={definition} value={values[name]} links={links} />
           ))}
-          <button type="submit" disabled={isSubmitting}>
-            Submit
-          </button>
+          <AutoSubmit />
         </Form>
       )}
     </Formik>

@@ -7,7 +7,7 @@ import FormSelect from './FormSelect'
 
 import { STRING, ARRAY, KEY_VALUE, LINK } from '../../../constants'
 
-function getField(name, definition, value, links) {
+function getField(name, definition, value = '', links) {
   if (definition.type === STRING) {
     if (definition.values) {
       const values = Object.values(definition.values)
