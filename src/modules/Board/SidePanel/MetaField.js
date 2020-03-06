@@ -4,7 +4,7 @@ import { Field } from 'formik'
 import _ from 'lodash'
 
 import FormSelect from './FormSelect'
-
+import KeyValueField from './KeyValueField'
 import { STRING, ARRAY, KEY_VALUE, LINK } from '../../../constants'
 
 function getField(name, definition, value = '', links) {
@@ -18,9 +18,6 @@ function getField(name, definition, value = '', links) {
   }
   if (definition.type === ARRAY) {
     const elementType = _.get(definition, 'element.type')
-    if (elementType === STRING) {
-      // creatable field
-    }
     if (elementType === LINK) {
       const source = _.get(definition, 'element.source', [])
       const readOnly = _.get(definition, 'element.readOnly')
@@ -33,7 +30,7 @@ function getField(name, definition, value = '', links) {
       return <FormSelect name={name} value={value} values={values} readOnly={readOnly} />
     }
     if (elementType === KEY_VALUE) {
-      // creatable key-value fields
+      return <KeyValueField name={name} values={value} />
     }
   }
 

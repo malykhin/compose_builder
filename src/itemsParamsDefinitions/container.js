@@ -29,7 +29,7 @@ export const definition = {
   labels: {
     type: ARRAY,
     element: {
-      type: STRING,
+      type: KEY_VALUE,
     },
   },
   container_name: {
