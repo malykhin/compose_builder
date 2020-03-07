@@ -1,5 +1,6 @@
 import _ from 'lodash'
 import uuid from 'uuid'
+import getRandomName from 'namesgenerator'
 
 import { MIN_BOX_HEIGHT, MIN_BOX_WIDTH, ITEM, BOX, BOX_RESIZE, CONNECTOR, NETWORK } from '../../../../constants'
 
@@ -46,6 +47,7 @@ function itemFactory(x, y, item) {
     type: item.type,
     width: 1,
     id: uuid(),
+    name: getRandomName(),
   }
   const itemMap = {
     [ITEM]: {

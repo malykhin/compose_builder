@@ -30,7 +30,7 @@ function getField(name, definition, value = '', links) {
       return <FormSelect name={name} value={value} values={values} readOnly={readOnly} />
     }
     if (elementType === KEY_VALUE) {
-      return <KeyValueField name={name} values={value} />
+      return <KeyValueField name={name} values={value || []} />
     }
   }
 

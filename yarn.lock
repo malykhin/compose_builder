@@ -6114,6 +6114,10 @@ mute-stream@0.0.8:
   version "0.0.8"
   resolved "https://registry.yarnpkg.com/mute-stream/-/mute-stream-0.0.8.tgz#1630c42b2251ff81e2a283de96a5497ea92e5e0d"
 
+namesgenerator@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/namesgenerator/-/namesgenerator-0.0.1.tgz#3204c85d77242a5f9bd8dd628f9c981a48d734ad"
+
 nan@^2.12.1:
   version "2.14.0"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.14.0.tgz#7818f722027b2459a86f0295d434d1fc2336c52c"

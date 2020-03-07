@@ -5,17 +5,20 @@ export default function useDropForConnector(ref, id, connections, setConnections
   const [, drop] = useDrop({
     accept: [CONNECTOR],
     drop: (item, monitor) => {
-      const existingConnections = connections.find(
+      const existingConnectionId = connections.findIndex(
         (connection) =>
-          (connection.from === item.id && connection.to === item.id) ||
-          (connection.from === id && connection.to === id),
+          (connection.from === item.id && connection.to === id) ||
+          (connection.from === id && connection.to === item.id),
       )
-      if (!existingConnections) {
+      if (existingConnectionId === -1) {
         const newConnection = {
           from: item.id,
           to: id,
         }
         setConnections([...connections, newConnection])
+      } else {
+        connections.splice(existingConnectionId, 1)
+        setConnections([...connections])
       }
     },
   })
