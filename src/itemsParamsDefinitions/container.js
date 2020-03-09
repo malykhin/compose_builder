@@ -32,6 +32,13 @@ export const definition = {
       type: KEY_VALUE,
     },
   },
+  ports: {
+    type: ARRAY,
+    element: {
+      type: KEY_VALUE,
+      source: [CONTAINER, PROXY],
+    },
+  },
   container_name: {
     type: STRING,
   },

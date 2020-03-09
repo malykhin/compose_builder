@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react'
 import { Formik, Form, useFormikContext } from 'formik'
-import _ from 'lodash'
 
 import MetaField from './MetaField'
 
-import { CONTAINER, VOLUME, PROXY, NETWORK, ARRAY, KEY_VALUE, LINK } from '../../../constants'
+import { getModelInitialValues, mergeModelAndExisting } from './utils'
+
+import { CONTAINER, VOLUME, PROXY, NETWORK } from '../../../constants'
 
 import { definition as containerDefinition } from '../../../itemsParamsDefinitions/container'
 import { definition as networkDefinition } from '../../../itemsParamsDefinitions/network'
@@ -26,25 +27,10 @@ const AutoSubmit = () => {
   return null
 }
 
-export default function MetaForm({ item, initialValues = {}, setItem, links }) {
+export default function MetaForm({ item, setItem, links }) {
   const model = modelsMap[item.kind]
   const fields = Object.entries(model)
-  const mergedInitialValues = {
-    ..._.mapValues(model, (it) => {
-      if (it.type === ARRAY) {
-        const elementType = _.get(it, 'element.type')
-        if (elementType === LINK) {
-          return ''
-        }
-        if (elementType === KEY_VALUE) {
-          return [{ key: '', value: '' }]
-        }
-      }
-      return ''
-    }),
-    ...initialValues,
-    ...item,
-  }
+  const mergedInitialValues = mergeModelAndExisting(getModelInitialValues(model, links), item)
 
   const handleSubmit = (values, { setSubmitting }) => {
     setItem({ ...item, ...values })

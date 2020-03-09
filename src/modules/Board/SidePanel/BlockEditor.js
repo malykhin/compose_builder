@@ -4,11 +4,11 @@ import { css } from '@emotion/core'
 import MetaForm from './MetaForm'
 
 import { getLinks } from './utils'
+
 export default function BlockEditor({ items, itemToEditId, setItemToEditId, setItem, connections }) {
   const goBack = () => setItemToEditId(null)
   const item = { ...items.find((item) => item.id === itemToEditId) }
   const links = getLinks(items, connections, itemToEditId)
-
   return (
     <div
       css={css`
@@ -40,7 +40,7 @@ export default function BlockEditor({ items, itemToEditId, setItemToEditId, setI
           margin-top: 8px;
         `}
       >
-        <MetaForm item={item} setItem={setItem} goBack={goBack} links={links} />
+        <MetaForm item={item} setItem={setItem} links={links} />
       </div>
     </div>
   )

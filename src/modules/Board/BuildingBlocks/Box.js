@@ -41,6 +41,9 @@ function Box({ x, y, width, height, id, name = 'Network', setItemToEditId = () =
       <div
         onClick={_setItemToEditId}
         css={css`
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
           cursor: ${isBoxDragging ? 'grabbing' : 'pointer'};
           display: inline-block;
           border: 1px solid #777;
