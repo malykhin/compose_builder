@@ -9,9 +9,17 @@ import { STRING, ARRAY, KEY_VALUE, LINK } from '../../../constants'
 
 function getField(name, definition, value = '', links) {
   if (definition.type === STRING) {
+    const source = _.get(definition, 'element.source', [])
+    const elementType = _.get(definition, 'element.type')
     if (definition.values) {
       const values = Object.values(definition.values)
       return <FormSelect name={name} value={value} values={values} />
+    } else if (elementType === LINK) {
+      const elementLinks = source.flatMap((s) => links[s])
+      if (!_.isEmpty(elementLinks)) {
+        return <Field name={name} value={value} />
+      }
+      return null
     } else {
       return <Field name={name} value={value} />
     }
@@ -38,6 +46,10 @@ function getField(name, definition, value = '', links) {
 }
 
 export default function MetaField({ name, definition, value, links }) {
+  const field = getField(name, definition, value, links)
+  if (!field) {
+    return null
+  }
   return (
     <div
       css={css`
@@ -51,7 +63,7 @@ export default function MetaField({ name, definition, value, links }) {
       >
         {name}
       </div>
-      {getField(name, definition, value, links)}
+      {field}
     </div>
   )
 }

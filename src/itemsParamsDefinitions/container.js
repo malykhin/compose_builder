@@ -66,6 +66,20 @@ export const definition = {
       source: [VOLUME],
     },
   },
+  proxy_port: {
+    type: STRING,
+    element: {
+      type: LINK,
+      source: [PROXY],
+    },
+  },
+  proxy_path: {
+    type: STRING,
+    element: {
+      type: LINK,
+      source: [PROXY],
+    },
+  },
 }
 
 export const keys = Object.keys(_.omit(definition, ['name', 'volume']))

@@ -9,11 +9,8 @@ export const definition = {
     type: STRING,
     uniq: [CONTAINER, PROXY],
   },
-  proxy_type: {
+  incoming_port: {
     type: STRING,
-    values: {
-      traefik: 'traefik',
-    },
   },
 }
 
