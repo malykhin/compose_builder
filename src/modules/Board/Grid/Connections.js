@@ -20,7 +20,7 @@ export default function Connections({ gridDimensions, gridShape, connections, it
         `}
       >
         {linesCoordinates.map((line) => (
-          <path fill="none" stroke="black" key={line.key} d={line.d} />
+          <path fill="none" stroke="#5C7080" key={line.key} d={line.d} />
         ))}
       </svg>
     )

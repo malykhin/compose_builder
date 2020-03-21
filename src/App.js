@@ -23,6 +23,7 @@ function App() {
           }
         `}
       />
+
       <Board xBoardSize={X_BOARD_SIZE} yBoardSize={Y_BOARD_SIZE} />
     </DndProvider>
   )

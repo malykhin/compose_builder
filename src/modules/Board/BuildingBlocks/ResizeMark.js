@@ -2,13 +2,13 @@ import React from 'react'
 
 import { css } from '@emotion/core'
 
-export default function ResizeMark({ resizeRef, isDragging, rowStart, columnStart }) {
+export default function ResizeMark({ resizeRef, rowStart, columnStart }) {
   return (
     <div
       ref={resizeRef}
       css={css`
         cursor: nwse-resize;
-        border: 1px solid #777;
+        border: 1px solid #8a9ba8;
         height: 10px;
         width: 10px;
         box-sizing: border-box;
@@ -18,7 +18,7 @@ export default function ResizeMark({ resizeRef, isDragging, rowStart, columnStar
         justify-self: end;
         z-index: 4;
         &:hover {
-          background-color: #ccc;
+          background-color: rgba(167, 182, 194, 0.3);
         }
       `}
     />

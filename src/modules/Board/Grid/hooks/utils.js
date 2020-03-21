@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import uuid from 'uuid'
-import getRandomName from 'namesgenerator'
+import getRandomName from '../../../../utils/getRandomName'
 
 import { MIN_BOX_HEIGHT, MIN_BOX_WIDTH, ITEM, BOX, BOX_RESIZE, CONNECTOR, NETWORK } from '../../../../constants'
 

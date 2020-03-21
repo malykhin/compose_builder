@@ -30,7 +30,7 @@ function Box({ x, y, width, height, id, name = 'Network', setItemToEditId = () =
     >
       <div
         css={css`
-          border: 1px solid #777;
+          border: 1px solid #8a9ba8;
           grid-column-start: 1;
           grid-row-start: 1;
           grid-column-end: end;
@@ -46,7 +46,7 @@ function Box({ x, y, width, height, id, name = 'Network', setItemToEditId = () =
           text-overflow: ellipsis;
           cursor: ${isBoxDragging ? 'grabbing' : 'pointer'};
           display: inline-block;
-          border: 1px solid #777;
+          border: 1px solid #8a9ba8;
           grid-column-start: 1;
           grid-row-start: 1;
           grid-column-end: end;
@@ -54,7 +54,7 @@ function Box({ x, y, width, height, id, name = 'Network', setItemToEditId = () =
           cursor: pointer;
           z-index: 2;
           &:hover {
-            background-color: #ccc;
+            background-color: rgba(167, 182, 194, 0.3);
           }
         `}
       >

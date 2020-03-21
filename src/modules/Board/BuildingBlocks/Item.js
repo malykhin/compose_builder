@@ -1,9 +1,7 @@
 import React from 'react'
 import { css } from '@emotion/core'
 
-import Container from './Container'
-import Folder from './Folder'
-import ProxyItem from './ProxyItem'
+import { Icon } from '@blueprintjs/core'
 
 import { ITEM, CONTAINER, VOLUME, PROXY } from '../../../constants'
 import useDragForBlock from './hooks/useDragForBlock'
@@ -11,9 +9,9 @@ import useDragForConnector from './hooks/useDragForConnector'
 import useDropForConnector from './hooks/useDropForConnector'
 
 const iconsMap = {
-  [CONTAINER]: Container,
-  [VOLUME]: Folder,
-  [PROXY]: ProxyItem,
+  [CONTAINER]: 'box',
+  [VOLUME]: 'folder-close',
+  [PROXY]: 'flow-branch',
 }
 
 function Item({ x, y, width, height, id, connections, setConnections, kind, setItemToEditId = () => {} }) {
@@ -21,9 +19,8 @@ function Item({ x, y, width, height, id, connections, setConnections, kind, setI
   const { ref: connectorRef } = useDragForConnector(id, ref)
   useDropForConnector(ref, id, connections, setConnections)
 
-  const KindIcon = iconsMap[kind]
   const canConnect = kind === CONTAINER
-
+  const icon = iconsMap[kind]
   const _setItemToEditId = () => setItemToEditId(id)
 
   return (
@@ -41,12 +38,12 @@ function Item({ x, y, width, height, id, connections, setConnections, kind, setI
         display: grid;
         grid-template-columns: 100%;
         grid-template-rows: 100%;
-        border: 1px solid #777;
+        border: 1px solid #8a9ba8;
         border-radius: 2px;
         z-index: 4;
         min-width: 50px;
         &:hover {
-          background-color: #ccc;
+          background-color: rgba(167, 182, 194, 0.3);
         }
       `}
     >
@@ -54,7 +51,7 @@ function Item({ x, y, width, height, id, connections, setConnections, kind, setI
         <div
           ref={connectorRef}
           css={css`
-            border: 1px solid #777;
+            border: 1px solid #8a9ba8;
             border-radius: 50%;
             grid-column: 1;
             grid-row: 1;
@@ -65,16 +62,14 @@ function Item({ x, y, width, height, id, connections, setConnections, kind, setI
             box-sizing: border-box;
             z-index: 6;
             &:hover {
-              background-color: #999;
+              background-color: #5c7080;
             }
           `}
         />
       )}
-      {KindIcon && (
+      {icon && (
         <div
           css={css`
-            min-width: 24px;
-            min-height: 24px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -84,7 +79,7 @@ function Item({ x, y, width, height, id, connections, setConnections, kind, setI
             grid-row: 1;
           `}
         >
-          <KindIcon />
+          <Icon icon={icon} />
         </div>
       )}
     </div>

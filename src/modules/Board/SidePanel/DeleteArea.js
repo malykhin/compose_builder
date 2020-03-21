@@ -14,7 +14,7 @@ export default function DeleteArea({ setItems, items, setConnections, connection
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: ${isHover ? '#eee' : 'transparent'};
+        background-color: ${isHover ? 'rgba(167, 182, 194, 0.3)' : 'transparent'};
       `}
     >
       <svg

@@ -1,10 +1,12 @@
 import React from 'react'
 import { css } from '@emotion/core'
-import { Field } from 'formik'
 import _ from 'lodash'
+import { FormGroup } from '@blueprintjs/core'
 
-import FormSelect from './FormSelect'
-import KeyValueField from './KeyValueField'
+import TextInput from '../../../components/form/TextInput'
+
+import FormSelect from '../../../components/form/FormSelect'
+import KeyValueField from '../../../components/form/KeyValueField'
 import { STRING, ARRAY, KEY_VALUE, LINK } from '../../../constants'
 
 function getField(name, definition, value = '', links) {
@@ -17,11 +19,11 @@ function getField(name, definition, value = '', links) {
     } else if (elementType === LINK) {
       const elementLinks = source.flatMap((s) => links[s])
       if (!_.isEmpty(elementLinks)) {
-        return <Field name={name} value={value} />
+        return <TextInput name={name} value={value} />
       }
       return null
     } else {
-      return <Field name={name} value={value} />
+      return <TextInput name={name} value={value} />
     }
   }
   if (definition.type === ARRAY) {
@@ -56,14 +58,7 @@ export default function MetaField({ name, definition, value, links }) {
         margin-bottom: 8px;
       `}
     >
-      <div
-        css={css`
-          text-transform: capitalize;
-        `}
-      >
-        {name}
-      </div>
-      {field}
+      <FormGroup label={_.capitalize(name)}>{field}</FormGroup>
     </div>
   )
 }

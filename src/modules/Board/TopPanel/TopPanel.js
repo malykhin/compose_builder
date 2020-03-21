@@ -1,40 +1,17 @@
 import React from 'react'
-import { css } from '@emotion/core'
+
+import { Alignment, Button, Navbar } from '@blueprintjs/core'
 
 function TopPanel({ saveFile, items, connections }) {
   const saveHandler = () => saveFile(items, connections)
 
   return (
-    <div
-      css={css`
-        display: flex;
-        flex-direction: row;
-        width: 100%;
-        border-bottom: 1px solid #eee;
-        grid-row: 1;
-        box-sizing: border-box;
-        align-items: center;
-      `}
-    >
-      <button
-        onClick={saveHandler}
-        css={css`
-          margin-left: 20px;
-          background-color: transparent;
-          border: 1px solid #eee;
-          cursor: pointer;
-          outline: none;
-          font-size: 16px;
-          padding: 8px;
-
-          &:hover {
-            background-color: #ccc;
-          }
-        `}
-      >
-        Save as docker-compose.yml
-      </button>
-    </div>
+    <Navbar>
+      <Navbar.Group align={Alignment.LEFT}>
+        <Button minimal icon="home" text="Home" />
+        <Button minimal icon="document" text="Save docker-compose.yml" onClick={saveHandler} />
+      </Navbar.Group>
+    </Navbar>
   )
 }
 

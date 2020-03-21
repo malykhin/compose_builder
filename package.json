@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@emotion/core": "^10.0.27",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
+    "@blueprintjs/core": "^3.24.0",
+    "@blueprintjs/icons": "^3.14.0",
+    "@blueprintjs/select": "^3.12.0",
+    "@emotion/core": "^10.0.28",
     "customize-cra": "^0.9.1",
     "d3": "^5.15.0",
     "d3-selection": "^1.4.1",
@@ -14,19 +14,15 @@
     "file-saver": "^2.0.2",
     "formik": "^2.1.4",
     "lodash": "^4.17.15",
-    "namesgenerator": "^0.0.1",
-    "react": "^16.12.0",
-    "react-app-rewired": "^2.1.5",
+    "react": "^16.13.1",
     "react-dnd": "^10.0.2",
     "react-dnd-html5-backend": "^10.0.2",
-    "react-dom": "^16.12.0",
-    "react-scripts": "3.3.1",
-    "react-transition-group": "^4.3.0",
+    "react-dom": "^16.13.1",
     "use-resize-observer": "^6.0.0",
     "uuid": "^3.4.0"
   },
   "scripts": {
-    "start": "react-app-rewired start",
+    "start": "REACT_APP_SKIP_SAVE=true react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "echo 1",
     "eject": "react-app-rewired eject"
@@ -47,6 +43,11 @@
     ]
   },
   "devDependencies": {
-    "@emotion/babel-preset-css-prop": "^10.0.27"
+    "@emotion/babel-preset-css-prop": "^10.0.27",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.5.0",
+    "@testing-library/user-event": "^7.1.2",
+    "react-app-rewired": "^2.1.5",
+    "react-scripts": "3.3.1"
   }
 }

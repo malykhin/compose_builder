@@ -11,7 +11,7 @@ export default function Shadows({ items }) {
           <div
             key={id}
             css={css`
-              background-color: ${isShadowDanger ? '#ed2939' : '#eee'};
+              background-color: ${isShadowDanger ? '#DB3737' : 'rgba(167, 182, 194, 0.3)'};
               grid-column-start: ${x};
               grid-column-end: ${x + width};
               grid-row-start: ${y};

@@ -1,14 +1,16 @@
 import _ from 'lodash'
 
-// import { saveAs } from 'file-saver'
+import { saveAs } from 'file-saver'
 
 import { CONTAINER, NETWORK, VOLUME, PROXY } from '../../constants'
-import { baseConfig, toYaml } from '../../toYaml'
+import { baseConfig, toYaml } from '../../utils/toYaml'
 
 import { keys as containerKeys } from '../../itemsParamsDefinitions/container'
 import { keys as networkKeys } from '../../itemsParamsDefinitions/network'
 import { keys as proxyKeys } from '../../itemsParamsDefinitions/proxy'
 import { keys as volumeKeys } from '../../itemsParamsDefinitions/volume'
+
+const IS_SKIP_SAVE = process.env.REACT_APP_SKIP_SAVE
 
 const keysToPickMap = {
   [CONTAINER]: containerKeys,
@@ -92,7 +94,10 @@ export function getComposeJSONDefinition(items, connections) {
 
 export function saveFile(items, connections) {
   const text = toYaml(getComposeJSONDefinition(items, connections))
-  console.log('definition', text)
-  // const blob = new Blob([text], { type: 'text/plain;charset=utf-8' })
-  // saveAs(blob, 'docker-compose.yml')
+  if (IS_SKIP_SAVE) {
+    console.log('definition', text)
+  } else {
+    const blob = new Blob([text], { type: 'text/plain;charset=utf-8' })
+    saveAs(blob, 'docker-compose.yml')
+  }
 }
