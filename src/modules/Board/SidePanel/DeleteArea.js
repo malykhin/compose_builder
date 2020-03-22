@@ -18,7 +18,7 @@ export default function DeleteArea({ setItems, items, setConnections, connection
       `}
     >
       <svg
-        fill={isHover ? '#333' : '#aaa'}
+        fill={isHover ? '#5C7080' : '#A7B6C2'}
         xmlns="http://www.w3.org/2000/svg"
         height="48"
         viewBox="0 0 24 24"
