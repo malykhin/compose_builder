@@ -25,12 +25,12 @@ export default function SidePanel({
         justify-content: space-between;
         height: 100%;
         overflow-y: auto;
+        border-right: 1px solid rgba(16, 22, 26, 0.2);
       `}
     >
       <div
         css={css`
           width: 100%;
-          border-right: 1px solid #eee;
           display: flex;
           flex-direction: column;
           justify-content: flex-start;

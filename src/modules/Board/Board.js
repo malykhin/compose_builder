@@ -25,10 +25,11 @@ function Board({ xBoardSize, yBoardSize }) {
       css={css`
         display: grid;
         grid-template-columns: 100%;
-        grid-template-rows: 8vh 92vh;
+        grid-template-rows: 50px 92vh;
       `}
     >
       <TopPanel saveFile={saveFile} items={items} connections={connections} />
+
       <div
         css={css`
           display: flex;
